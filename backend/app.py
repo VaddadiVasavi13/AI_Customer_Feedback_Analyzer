@@ -4,10 +4,11 @@ from flask_cors import CORS
 import re
 import joblib
 import ollama
+import nltk
 
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
-from pathlib import Path
+from pathlib import Path    
 
 # ==========================================
 # Create Flask Application
@@ -38,6 +39,9 @@ vectorizer = joblib.load(
 # Stopwords
 # ==========================================
 
+NLTK_DATA_DIR = BASE_DIR.parent / "nltk_data"
+
+nltk.data.path.append(str(NLTK_DATA_DIR))
 stop_words = set(stopwords.words("english"))
 
 
