@@ -39,9 +39,7 @@ function App() {
 
       setResult(data);
     } catch (err) {
-      setError(
-        "Unable to connect to the Flask backend. Make sure Flask is running."
-      );
+      setError(err.message);
     } finally {
       setLoading(false);
     }
