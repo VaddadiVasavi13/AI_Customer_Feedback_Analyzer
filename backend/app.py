@@ -7,7 +7,7 @@ import ollama
 
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
-
+from pathlib import Path
 
 # ==========================================
 # Create Flask Application
@@ -22,9 +22,17 @@ CORS(app)
 # Load ML Model and TF-IDF Vectorizer
 # ==========================================
 
-model = joblib.load("../model/sentiment_model.pkl")
+BASE_DIR = Path(__file__).resolve().parent
 
-vectorizer = joblib.load("../model/tfidf_vectorizer.pkl")
+MODEL_DIR = BASE_DIR.parent / "model"
+
+model = joblib.load(
+    MODEL_DIR / "sentiment_model.pkl"
+)
+
+vectorizer = joblib.load(
+    MODEL_DIR / "tfidf_vectorizer.pkl"
+)
 
 # ==========================================
 # Stopwords
@@ -354,7 +362,7 @@ def analyze_feedback():
 if __name__ == "__main__":
 
     app.run(
-        host="127.0.0.1",
-        port=5000,
-        debug=True
-    )
+    host="0.0.0.0",
+    port=5000,
+    debug=False
+)
